@@ -22,7 +22,11 @@ router.get("/register", function(req, res){
 
 //sign up logic
 router.post("/register", function(req, res){
+     /* eval(require("locus")); */
+    //locus stops code so that you can see what variables are available to you. variables have to be declared before eval()
+
     var newUser = new User({username: req.body.username});
+    if(req.body.adminCode === "secretcode123") newUser.isAdmin = true;
     User.register(newUser, req.body.password, function(err, user){
         if(err){
             console.log(err);
@@ -37,7 +41,6 @@ router.post("/register", function(req, res){
 });
 
 //show login form
-//show login form
 router.get("/login", function(req, res){
    res.render("login", {page: 'login'}); 
 });
@@ -46,8 +49,11 @@ router.get("/login", function(req, res){
 //HANDLE LOGIN FORM LOGIC
 router.post("/login", passport.authenticate("local", {
     successRedirect: "/campgrounds",
-    failureRedirect: "/login"
+    failureRedirect: "/login",
+    failureFlash: true,
+    successFlash: "Welcome back to YelpCamp!"
     }), function(req, res){
+        req.flash("success", "Welcome back " + req.user.username);
 });
 
 //HANDLE LOGOUT ROUTE

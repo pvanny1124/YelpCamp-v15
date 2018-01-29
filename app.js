@@ -20,15 +20,15 @@ var commentRoutes       = require("./routes/comments"),
 //seedDB(); //seed the database
 
 //CONFIG
-var url = process.env.DATABASEURL;
+var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v15";
 mongoose.connect(url);
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public")); //__dirname is to always make sure we are in THIS directory to serve public folder
 app.use(methodOverride("_method"));
 app.use(flash());
+app.locals.moment = require('moment'); //Moment JS is used for displaying exactly how long ago a user did something such as adding a comment for example.
 app.set("view engine", "ejs");
-
-
 
 //PASSPORT CONFIG
 app.use(require("express-session")({

@@ -13,7 +13,7 @@ middlewareObj.checkCampgroundOwnership = function(req, res, next){
              //does user own the campground?
              //if(campground.author.id === req.user._id) -> doing it this way is wrong. 1st is a mongoose object, second is a string
              //do this instead
-             if(foundCampground.author.id.equals(req.user._id)){
+             if(foundCampground.author.id.equals(req.user._id) || req.user.isAdmin){
                  next(); 
              } else {
                  req.flash("error", "You don't have permission to do that");
@@ -34,7 +34,7 @@ middlewareObj.checkCommentOwnership = function(req, res, next){
             res.redirect("/campgrounds");
         } else {
              //does user own the campground?
-             if(foundComment.author.id.equals(req.user._id)){
+             if(foundComment.author.id.equals(req.user._id) || req.user.isAdmin){
                  next(); 
              } else {
                  req.flash("error", "You don't have permission to do that");

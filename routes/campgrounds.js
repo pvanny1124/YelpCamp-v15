@@ -41,6 +41,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
         };
     
     geocoder.geocode(req.body.location, function (err, data) {
+        console.log(data);
         var lat = data.results[0].geometry.location.lat;
         var lng = data.results[0].geometry.location.lng;
         var location = data.results[0].formatted_address;

@@ -1,8 +1,11 @@
 
-v14 YelpCamp
+v15 YelpCamp
 
 new features: 
 
--added location field in the "add a new campground" form
--added locaton field in the "edit" form
--added google maps box to display this location on the map under info sections in the "show" page
+-added MomentJS to show time from when a user posted a campground or a comment
+-added admin roles
+-added admin code field to sign up form
+-added isAdmin parameter to UserSchema to check admin role
+-added ability for an admin to edit/delete any campground or comment
+
